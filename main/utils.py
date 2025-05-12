@@ -28,6 +28,7 @@ def write_same_order(df, output_filepath):
     i = 0
     records = df.to_dict('records')
     n = len(records)
+    p = None
 
     while i < n:
         current = records[i]
@@ -35,20 +36,15 @@ def write_same_order(df, output_filepath):
             frameglasses.append([current['id']])
             i += 1
         elif current['type'] == 'Parser':
-            if i + 1 < n and records[i + 1]['type'] == 'Parser':
-                frameglasses.append([current['id'], records[i + 1]['id']])
-                i += 2
+            if p is None:
+                p = current['id']
+                i+=1
             else:
-                # Unpaired Parser
-                frameglasses.append([current['id']])
+                frameglasses.append([p, current['id']])
+                p = None
                 i += 1
 
     with open(output_filepath, 'w') as f:
         f.write(f"{len(frameglasses)}\n")
         for frame in frameglasses:
             f.write(" ".join(map(str, frame)) + "\n")
-
-def write_random_order(df, output_filepath):
-    frameglasses = []
-    records = df.to_dict('records')
-    n = len(records)
