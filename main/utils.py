@@ -100,8 +100,10 @@ def df_analysis(df, output_filepath="data/output/analysis_output.txt", plot=Fals
     write("Dataset Analysis\n")
 
     # Type distribution
+    total_paintings = df['id'].nunique()
     type_counts = df['type'].value_counts()
     write("1 - ️Type Distribution (L vs P):")
+    write(f"Total number of paintings: {total_paintings}")
     write(type_counts.to_string())
     write()
 
@@ -136,8 +138,9 @@ def df_analysis(df, output_filepath="data/output/analysis_output.txt", plot=Fals
     write(f"5 -  Average Tags per Painting: {avg_tags:.2f}\n")
 
     # Rare tags
-    rare_tags = [tag for tag, count in tag_freq.items() if count == 1]
-    write(f"6 -  Number of Rare Tags (appear only once): {len(rare_tags)}")
+    threshold = total_paintings * (10 / 100)
+    rare_tags = [tag for tag, count in tag_freq.items() if count <= threshold]
+    write(f"6 -  Number of Rare Tags (appear in less than 5% of all paintings): {len(rare_tags)}")
     if len(rare_tags) > 0:
         write(f"Example rare tags: {rare_tags[:5]}\n")
 
