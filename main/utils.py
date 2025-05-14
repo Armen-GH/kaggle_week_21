@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 import pandas as pd
 import random
 
@@ -52,34 +54,41 @@ def get_frameglasses(df):
 def write_same_order(df, output_filepath):
     frameglasses = get_frameglasses(df)
 
-    with open(output_filepath, 'w') as f:
-        f.write(f"{len(frameglasses)}\n")
-        for frame in frameglasses:
-            f.write(" ".join(map(str, frame)) + "\n")
+    write_fg(frameglasses, output_filepath)
 
 def write_reverse_order(df, output_filepath):
     frameglasses = get_frameglasses(df)
     frameglasses.reverse()
 
-    with open(output_filepath, 'w') as f:
-        f.write(f"{len(frameglasses)}\n")
-        for frame in frameglasses:
-            f.write(" ".join(map(str, frame)) + "\n")
+    write_fg(frameglasses, output_filepath)
 
 def write_random_order(df, output_filepath):
     frameglasses = get_frameglasses(df)
     random.shuffle(frameglasses)
 
-    with open(output_filepath, 'w') as f:
-        f.write(f"{len(frameglasses)}\n")
-        for frame in frameglasses:
-            f.write(" ".join(map(str, frame)) + "\n")
+    write_fg(frameglasses, output_filepath)
 
 def write_tags_order(df, output_filepath):
     frameglasses = get_frameglasses(df)
     frameglasses.sort(key=lambda x: x[0])
 
+    write_fg(frameglasses, output_filepath)
+
+
+def write_fg(frameglasses, output_filepath):
     with open(output_filepath, 'w') as f:
         f.write(f"{len(frameglasses)}\n")
         for frame in frameglasses:
             f.write(" ".join(map(str, frame)) + "\n")
+
+
+def get_tags_with_paintings(df):
+    tag_to_paintings = defaultdict(list)
+
+    for _, row in df.iterrows():
+        painting_id = row['id']
+        tags = row['tags']
+        for tag in tags:
+            tag_to_paintings[tag].append(painting_id)
+
+    return dict(tag_to_paintings)
