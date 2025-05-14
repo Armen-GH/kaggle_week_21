@@ -1,6 +1,8 @@
-from collections import defaultdict
+from collections import defaultdict, Counter
+from itertools import combinations
 
 import pandas as pd
+import matplotlib.pyplot as plt
 import random
 
 
@@ -51,18 +53,18 @@ def get_frameglasses(df):
 
     return frameglasses
 
-def write_same_order(df, output_filepath):
+def same_order(df):
     return get_frameglasses(df)
 
-def write_reverse_order(df):
+def reverse_order(df):
     frameglasses = get_frameglasses(df)
     return frameglasses.reverse()
 
-def write_random_order(df):
+def random_order(df):
     frameglasses = get_frameglasses(df)
     return random.shuffle(frameglasses)
 
-def write_tags_order(df):
+def tags_order(df):
     frameglasses = get_frameglasses(df)
     return frameglasses.sort(key=lambda x: x[0])
 
@@ -79,7 +81,7 @@ def write_dict(output_filepath, tag_to_paintings):
             painting_ids_str = " ".join(map(str, paintings))
             f.write(f"{tag}: {painting_ids_str}\n")
 
-def tags_with_paintings(df):
+def get_tags_with_paintings(df):
     tag_to_paintings = defaultdict(list)
 
     for _, row in df.iterrows():
@@ -88,3 +90,70 @@ def tags_with_paintings(df):
         for tag in tags:
             tag_to_paintings[tag].append(painting_id)
     return tag_to_paintings
+
+def analyze_dataset(df, output_filepath="data/output/analysis_output.txt", plot=False):
+    def write(line=""):
+        with open(output_filepath, 'a', encoding='utf-8') as f:
+            f.write(line + "\n")
+
+    open(output_filepath, 'w', encoding='utf-8').close()
+    write("Dataset Analysis\n")
+
+    # Type distribution
+    type_counts = df['type'].value_counts()
+    write("1 - ️Type Distribution (L vs P):")
+    write(type_counts.to_string())
+    write()
+
+    # Tag frequency
+    all_tags = [tag for tags in df['tags'] for tag in tags]
+    tag_freq = Counter(all_tags)
+    write("2 - Tag Frequency (top 10):")
+    for tag, count in tag_freq.most_common(10):
+        write(f"{tag}: {count}")
+    write()
+
+    # Paintings per tag
+    tag_to_paintings = get_tags_with_paintings(df)
+    tag_paintings_count = {tag: len(set(ids)) for tag, ids in tag_to_paintings.items()}
+    write("3 - Tags with Most Paintings (top 10):")
+    for tag, count in sorted(tag_paintings_count.items(), key=lambda x: x[1], reverse=True)[:10]:
+        write(f"{tag}: {count}")
+    write()
+
+    # Tag co-occurrence
+    co_occurrence = Counter()
+    for tags in df['tags']:
+        for pair in combinations(sorted(tags), 2):
+            co_occurrence[pair] += 1
+    write("4 - Tag Co-occurrence (top 5 pairs):")
+    for pair, count in co_occurrence.most_common(5):
+        write(f"{pair}: {count}")
+    write()
+
+    # Average tags per painting
+    avg_tags = df['tag_count'].mean()
+    write(f"5 -  Average Tags per Painting: {avg_tags:.2f}\n")
+
+    # Rare tags
+    rare_tags = [tag for tag, count in tag_freq.items() if count == 1]
+    write(f"6 -  Number of Rare Tags (appear only once): {len(rare_tags)}")
+    if len(rare_tags) > 0:
+        write(f"Example rare tags: {rare_tags[:5]}\n")
+
+    # Optional plotting
+    if plot:
+        plt.figure(figsize=(10, 5))
+        tags, freqs = zip(*tag_freq.most_common(15))
+        plt.bar(tags, freqs)
+        plt.xticks(rotation=45, ha='right')
+        plt.title('Top 15 Tag Frequencies')
+        plt.ylabel('Count')
+        plt.tight_layout()
+        plt.show()
+
+        plt.figure()
+        type_counts.plot.pie(autopct='%1.1f%%', startangle=90, title='Type Distribution')
+        plt.ylabel('')
+        plt.tight_layout()
+        plt.show()
