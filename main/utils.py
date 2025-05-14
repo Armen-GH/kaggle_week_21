@@ -82,13 +82,19 @@ def write_fg(frameglasses, output_filepath):
             f.write(" ".join(map(str, frame)) + "\n")
 
 
-def get_tags_with_paintings(df):
+def write_tags_with_paintings(df, output_filepath):
     tag_to_paintings = defaultdict(list)
 
+    # Build the mapping
     for _, row in df.iterrows():
         painting_id = row['id']
         tags = row['tags']
         for tag in tags:
             tag_to_paintings[tag].append(painting_id)
 
-    return dict(tag_to_paintings)
+    # Write to file
+    with open(output_filepath, 'w') as f:
+        for tag in sorted(tag_to_paintings.keys()):
+            paintings = tag_to_paintings[tag]
+            painting_ids_str = " ".join(map(str, paintings))
+            f.write(f"{tag}: {painting_ids_str}\n")
