@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d478e30-c7bc-48be-9736-a7c53768f556" name="Changes" comment="added scoring function">
+    <list default="true" id="9d478e30-c7bc-48be-9736-a7c53768f556" name="Changes" comment="fixed scoring functions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/data/output/binary.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/data/output/computable.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/data/output/example.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/data/output/oily.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/data/output/output_yuke.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/data/output/paintings.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/data/output/tags_paintings_frq.tags" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/data/output/test.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/utils.py" afterDir="false" />
     </list>
     <list id="47f4dbab-40df-4a43-96ba-e925ec33fade" name="Changes by HUAWEI" comment="" />
     <list id="4d258606-3b05-4b33-9e18-999863a995f9" name="Changes by rmisu" comment="" />
@@ -97,7 +106,7 @@
       <workItem from="1747054134797" duration="9482000" />
       <workItem from="1747132670376" duration="94000" />
       <workItem from="1747221850735" duration="222000" />
-      <workItem from="1747222576617" duration="9363000" />
+      <workItem from="1747222576617" duration="12260000" />
     </task>
     <task id="LOCAL-00001" summary="read/parse&#10;same order (needs to be fixed)">
       <option name="closed" value="true" />
@@ -219,7 +228,23 @@
       <option name="project" value="LOCAL" />
       <updated>1747230227604</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fixed scoring functions">
+      <option name="closed" value="true" />
+      <created>1747232219064</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1747232219064</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fixed scoring functions">
+      <option name="closed" value="true" />
+      <created>1747232768447</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1747232768447</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,11 +256,12 @@
     <MESSAGE value="minor adj" />
     <MESSAGE value="added data analysis" />
     <MESSAGE value="added scoring function" />
-    <option name="LAST_COMMIT_MESSAGE" value="added scoring function" />
+    <MESSAGE value="fixed scoring functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed scoring functions" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PythonProject$script.coverage" NAME="script Coverage Results" MODIFIED="1747062508468" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
     <SUITE FILE_PATH="coverage/PythonProject$utils.coverage" NAME="utils Coverage Results" MODIFIED="1747225877578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
-    <SUITE FILE_PATH="coverage/PythonProject$test.coverage" NAME="test Coverage Results" MODIFIED="1747230953532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
+    <SUITE FILE_PATH="coverage/PythonProject$test.coverage" NAME="test Coverage Results" MODIFIED="1747234833446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
   </component>
 </project>

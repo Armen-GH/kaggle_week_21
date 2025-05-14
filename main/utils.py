@@ -103,7 +103,8 @@ def reverse_order(df):
 
 def random_order(df):
     frameglasses = get_frameglasses(df)
-    return random.shuffle(frameglasses)
+    random.shuffle(frameglasses)
+    return frameglasses
 
 def tags_order(df):
     frameglasses = get_frameglasses(df)
@@ -122,7 +123,7 @@ def write_dict(output_filepath, tag_to_paintings):
             painting_ids_str = " ".join(map(str, paintings))
             f.write(f"{tag}: {painting_ids_str}\n")
 
-def get_tags_with_paintings(df):
+def get_tags_with_paintings_dict(df):
     tag_to_paintings = defaultdict(list)
 
     for _, row in df.iterrows():
@@ -157,7 +158,7 @@ def df_analysis(df, output_filepath="data/output/analysis_output.txt", plot=Fals
     write()
 
     # Paintings per tag
-    tag_to_paintings = get_tags_with_paintings(df)
+    tag_to_paintings = get_tags_with_paintings_dict(df)
     tag_paintings_count = {tag: len(set(ids)) for tag, ids in tag_to_paintings.items()}
     write("3 - Tags with Most Paintings (top 10):")
     for tag, count in sorted(tag_paintings_count.items(), key=lambda x: x[1], reverse=True)[:10]:
@@ -201,3 +202,38 @@ def df_analysis(df, output_filepath="data/output/analysis_output.txt", plot=Fals
         plt.ylabel('')
         plt.tight_layout()
         plt.show()
+
+def get_frameglass_tags(frameglass, df):
+    tags = set()
+    for painting_id in frameglass:
+        row = df.loc[df['id'] == painting_id, 'tags'].values
+        if row.size > 0:
+            tags.update(row[0])
+    return tags
+
+def greedy_matching(frameglasses, df_paintings, output_filepath = "data/output/ordered_tags.txt"):
+    remaining = frameglasses.copy()
+    current = remaining.pop(0)
+    ordering = [current]
+    current_tags = get_frameglass_tags(current, df_paintings)
+
+    while remaining:
+        best_score = float('inf')
+        best_index = -1
+
+        for idx, candidate in enumerate(remaining):
+            candidate_tags = get_frameglass_tags(candidate, df_paintings)
+            score = local_score(current_tags, candidate_tags)
+            if score < best_score:
+                best_score = score
+                best_index = idx
+
+        next_frame = remaining.pop(best_index)
+        ordering.append(next_frame)
+        current_tags = get_frameglass_tags(next_frame, df_paintings)
+
+    with open(output_filepath, 'w', encoding='utf-8') as f:
+        f.write(f"{len(frameglasses)}\n")
+        for frame in frameglasses:
+            line = ' '.join(map(str, frame))
+            f.write(f"{line}\n")
