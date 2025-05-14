@@ -52,28 +52,19 @@ def get_frameglasses(df):
     return frameglasses
 
 def write_same_order(df, output_filepath):
+    return get_frameglasses(df)
+
+def write_reverse_order(df):
     frameglasses = get_frameglasses(df)
+    return frameglasses.reverse()
 
-    write_fg(frameglasses, output_filepath)
-
-def write_reverse_order(df, output_filepath):
+def write_random_order(df):
     frameglasses = get_frameglasses(df)
-    frameglasses.reverse()
+    return random.shuffle(frameglasses)
 
-    write_fg(frameglasses, output_filepath)
-
-def write_random_order(df, output_filepath):
+def write_tags_order(df):
     frameglasses = get_frameglasses(df)
-    random.shuffle(frameglasses)
-
-    write_fg(frameglasses, output_filepath)
-
-def write_tags_order(df, output_filepath):
-    frameglasses = get_frameglasses(df)
-    frameglasses.sort(key=lambda x: x[0])
-
-    write_fg(frameglasses, output_filepath)
-
+    return frameglasses.sort(key=lambda x: x[0])
 
 def write_fg(frameglasses, output_filepath):
     with open(output_filepath, 'w') as f:
@@ -81,20 +72,18 @@ def write_fg(frameglasses, output_filepath):
         for frame in frameglasses:
             f.write(" ".join(map(str, frame)) + "\n")
 
-
-def write_tags_with_paintings(df, output_filepath):
-    tag_to_paintings = defaultdict(list)
-
-    # Build the mapping
-    for _, row in df.iterrows():
-        painting_id = row['id']
-        tags = row['tags']
-        for tag in tags:
-            tag_to_paintings[tag].append(painting_id)
-
-    # Write to file
+def write_dict(output_filepath, tag_to_paintings):
     with open(output_filepath, 'w') as f:
         for tag in sorted(tag_to_paintings.keys()):
             paintings = tag_to_paintings[tag]
             painting_ids_str = " ".join(map(str, paintings))
             f.write(f"{tag}: {painting_ids_str}\n")
+
+def tags_with_paintings(df, output_filepath):
+    tag_to_paintings = defaultdict(list)
+
+    for _, row in df.iterrows():
+        painting_id = row['id']
+        tags = row['tags']
+        for tag in tags:
+            tag_to_paintings[tag].append(painting_id)
