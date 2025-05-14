@@ -27,6 +27,18 @@ def parse_file(filepath):
     df = pd.DataFrame(records)
     return df
 
+def read_order_file(order_filepath):
+    frameglasses = []
+    with open(order_filepath, 'r') as file:
+        line_count = int(file.readline().strip())  # first line = frameglass count
+        for _ in range(line_count):
+            line = file.readline()
+            if not line.strip():
+                continue  # skip empty lines
+            ids = list(map(int, line.strip().split()))
+            frameglasses.append(ids)
+    return frameglasses
+
 def get_frameglasses(df):
     frameglasses = []
     records = df.to_dict('records')
@@ -52,6 +64,35 @@ def get_frameglasses(df):
         frameglasses.append([p])  # Handle unpaired P
 
     return frameglasses
+
+def local_score(tags1, tags2):
+    tags1 = set(tags1)
+    tags2 = set(tags2)
+    return min(
+        len(tags1 & tags2),
+        len(tags1 - tags2),
+        len(tags2 - tags1)
+    )
+
+def global_score(order_filepath, df_paintings):
+    frameglasses = read_order_file(order_filepath)
+
+    frameglass_tags = []
+    for frame in frameglasses:
+        tags = set()
+        for painting_id in frame:
+            # Safely get tags of this painting
+            painting_tags = df_paintings.loc[df_paintings['id'] == painting_id, 'tags'].values
+            if painting_tags.size > 0:
+                tags.update(painting_tags[0])
+        frameglass_tags.append(tags)
+
+    local_scores = []
+    for i in range(len(frameglass_tags) - 1):
+        score = local_score(frameglass_tags[i], frameglass_tags[i+1])
+        local_scores.append(score)
+
+    return sum(local_scores)
 
 def same_order(df):
     return get_frameglasses(df)
