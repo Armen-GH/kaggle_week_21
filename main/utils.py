@@ -91,7 +91,7 @@ def get_tags_with_paintings(df):
             tag_to_paintings[tag].append(painting_id)
     return tag_to_paintings
 
-def analyze_dataset(df, output_filepath="data/output/analysis_output.txt", plot=False):
+def df_analysis(df, output_filepath="data/output/analysis_output.txt", plot=False):
     def write(line=""):
         with open(output_filepath, 'a', encoding='utf-8') as f:
             f.write(line + "\n")
