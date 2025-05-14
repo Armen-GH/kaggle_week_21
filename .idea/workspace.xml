@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d478e30-c7bc-48be-9736-a7c53768f556" name="Changes" comment="read/parse&#10;same order (needs to be fixed)">
+    <list default="true" id="9d478e30-c7bc-48be-9736-a7c53768f556" name="Changes" comment="fixed same order write">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/0_example.txt" beforeDir="false" afterPath="$PROJECT_DIR$/main/data/0_example.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/10_computable_moments.txt" beforeDir="false" afterPath="$PROJECT_DIR$/main/data/10_computable_moments.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/110_oily_portraits.txt" beforeDir="false" afterPath="$PROJECT_DIR$/main/data/110_oily_portraits.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/11_randomizing_paintings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/main/data/11_randomizing_paintings.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/1_binary_landscapes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/main/data/1_binary_landscapes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/utils.py" afterDir="false" />
     </list>
+    <list id="47f4dbab-40df-4a43-96ba-e925ec33fade" name="Changes by HUAWEI" comment="" />
+    <list id="4d258606-3b05-4b33-9e18-999863a995f9" name="Changes by rmisu" comment="" />
+    <list id="b43300c5-71ec-4b30-81b4-0c9965356cd5" name="Changes by test" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,52 +26,54 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Armen-GH"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Armen-GH&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Armen-GH/kaggle_week_21",
-    "accountId": "9cb500e0-08b1-407a-b74d-78f37dba1a45"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Armen-GH/kaggle_week_21&quot;,
+    &quot;accountId&quot;: &quot;9cb500e0-08b1-407a-b74d-78f37dba1a45&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2wzpD7g4vCnulGSENP3TTlbbxfk" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.script.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/hadda/PycharmProjects/PythonProject/data",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.script.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/hadda/PycharmProjects/PythonProject/data&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\hadda\PycharmProjects\PythonProject\data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hadda\PycharmProjects\PythonProject\main\data" />
+      <recent name="C:\Users\hadda\PycharmProjects\PythonProject\main\data\output" />
       <recent name="C:\Users\hadda\PycharmProjects\PythonProject\main" />
       <recent name="C:\Users\hadda\PycharmProjects\PythonProject\.venv\Lib\site-packages\utils" />
       <recent name="C:\Users\hadda\PycharmProjects\PythonProject\.venv\Lib\site-packages\pip" />
-      <recent name="C:\Users\hadda\PycharmProjects\PythonProject" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -92,7 +91,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1747054133757</updated>
-      <workItem from="1747054134797" duration="4544000" />
+      <workItem from="1747054134797" duration="9482000" />
+      <workItem from="1747132670376" duration="94000" />
     </task>
     <task id="LOCAL-00001" summary="read/parse&#10;same order (needs to be fixed)">
       <option name="closed" value="true" />
@@ -118,7 +118,23 @@
       <option name="project" value="LOCAL" />
       <updated>1747057681643</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fixed same order write">
+      <option name="closed" value="true" />
+      <created>1747058839620</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747058839620</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fixed same order write">
+      <option name="closed" value="true" />
+      <created>1747132755539</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1747132755539</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,9 +142,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="read/parse&#10;same order (needs to be fixed)" />
-    <option name="LAST_COMMIT_MESSAGE" value="read/parse&#10;same order (needs to be fixed)" />
+    <MESSAGE value="fixed same order write" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed same order write" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PythonProject$script.coverage" NAME="script Coverage Results" MODIFIED="1747058639527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
+    <SUITE FILE_PATH="coverage/PythonProject$script.coverage" NAME="script Coverage Results" MODIFIED="1747062508468" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
+    <SUITE FILE_PATH="coverage/PythonProject$test.coverage" NAME="test Coverage Results" MODIFIED="1747063259103" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
   </component>
 </project>
