@@ -1,0 +1,43 @@
+Dataset Analysis
+
+1 - ️Type Distribution (L vs P):
+Total number of paintings: 80000
+type
+L    80000
+
+2 - Tag Frequency (top 10):
+ar5fv: 2
+a99am: 2
+a5nnd: 2
+aj4f: 2
+awzgl: 2
+a6zkl: 2
+acz3g: 2
+av1h01: 2
+av7za: 2
+a5ul1: 2
+
+3 - Tags with Most Paintings (top 10):
+ar5fv: 2
+a99am: 2
+a5nnd: 2
+aj4f: 2
+awzgl: 2
+a6zkl: 2
+acz3g: 2
+av1h01: 2
+av7za: 2
+a5ul1: 2
+
+4 - Tag Co-occurrence (top 5 pairs):
+('a111w', 'a6zkl'): 2
+('a111w', 'awzgl'): 2
+('a2hzq', 'av1h01'): 2
+('a2hzq', 'av7za'): 2
+('a5nnd', 'acz3g'): 2
+
+5 -  Average Tags per Painting: 18.00
+
+6 -  Number of Rare Tags (appear in less than 5% of all paintings): 840000
+Example rare tags: ['ar5fv', 'a99am', 'a5nnd', 'aj4f', 'awzgl']
+
