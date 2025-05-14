@@ -79,7 +79,7 @@ def write_dict(output_filepath, tag_to_paintings):
             painting_ids_str = " ".join(map(str, paintings))
             f.write(f"{tag}: {painting_ids_str}\n")
 
-def tags_with_paintings(df, output_filepath):
+def tags_with_paintings(df):
     tag_to_paintings = defaultdict(list)
 
     for _, row in df.iterrows():
@@ -87,3 +87,4 @@ def tags_with_paintings(df, output_filepath):
         tags = row['tags']
         for tag in tags:
             tag_to_paintings[tag].append(painting_id)
+    return tag_to_paintings
