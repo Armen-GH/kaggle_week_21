@@ -1,6 +1,8 @@
 import itertools
 from collections import defaultdict, Counter
 from itertools import combinations
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.cluster import KMeans
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -218,32 +220,67 @@ def get_frameglass_tags(frameglass, df):
 
     return tags
 
-import itertools
+def tag_matrix(df):
+    # Turn list of tags into a space-separated string per painting
+    tag_strings = [' '.join(tags) for tags in df['tags']]
+    vectorizer = CountVectorizer(binary=True)
+    X = vectorizer.fit_transform(tag_strings)
+    return X
 
-def greedy_match(df):
-    best_score = -1
-    best_frameglasses = None
+def cluster_paintings(df, k):
+    X = tag_matrix(df)
+    kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
+    labels = kmeans.fit_predict(X)
+    df['cluster'] = labels
+    return df
 
-    # Get all permutations of painting records (not IDs)
-    records = df.to_dict("records")
-    for perm in itertools.permutations(records):
-        # Reconstruct a new DataFrame from the permutation
-        perm_df = pd.DataFrame(perm)
+def greedy_order_cluster(df_cluster):
+    tag_to_paintings = get_tags_with_paintings_dict(df_cluster)
+    id_to_row = {row['id']: row for _, row in df_cluster.iterrows()}
+    used = set()
+    order = []
 
-        # Apply your logic to group into frameglasses
-        frameglasses = get_frameglasses(perm_df)
+    for start_id in df_cluster['id'].tolist():
+        if start_id in used:
+            continue
 
-        # Compute tag sets
-        tags_list = [get_frameglass_tags(fg, df) for fg in frameglasses]
+        queue = [start_id]
+        while queue:
+            current = queue.pop(0)
+            if current in used:
+                continue
 
-        # Compute total local score
-        score = sum(
-            local_score(tags_list[i], tags_list[i + 1])
-            for i in range(len(tags_list) - 1)
-        )
+            used.add(current)
+            order.append(id_to_row[current])
 
-        if score > best_score:
-            best_score = score
-            best_frameglasses = frameglasses
+            neighbors = set()
+            for tag in id_to_row[current]['tags']:
+                for neighbor in tag_to_paintings[tag]:
+                    if neighbor not in used:
+                        neighbors.add(neighbor)
 
-    return best_frameglasses  # As expected: list of [id] or [id1, id2]
+            if neighbors:
+                def score_key(pid):
+                    t1 = set(id_to_row[current]['tags'])
+                    t2 = set(id_to_row[pid]['tags'])
+                    return -local_score(t1, t2)
+
+                next_id = sorted(neighbors, key=score_key)[0]
+                queue.append(next_id)
+
+    return pd.DataFrame(order)
+
+def kmeans_chunked_match(df, k=10):
+    clustered_df = cluster_paintings(df.copy(), k)
+    full_order = []
+
+    for cluster_id in sorted(clustered_df['cluster'].unique()):
+        cluster_df = clustered_df[clustered_df['cluster'] == cluster_id]
+        ordered = greedy_order_cluster(cluster_df)
+        full_order.extend(ordered.to_dict('records'))
+
+    # Recreate DataFrame, apply frameglass logic
+    final_order_df = pd.DataFrame(full_order)
+    frameglasses = get_frameglasses(final_order_df)
+
+    return frameglasses
