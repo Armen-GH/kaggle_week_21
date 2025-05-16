@@ -5,6 +5,7 @@ start = time.time()
 
 df = parse_file("data/0_example.txt")
 fg = get_frameglasses(df)
+fg_tags = get_frameglass_tags(df)
 paintings_tags = get_tags_with_paintings_dict(df)
 fg_gm =greedy_matching(fg, paintings_tags)
 write_fg(fg_gm, "data/output/example_gm.txt")

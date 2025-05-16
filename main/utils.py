@@ -211,33 +211,27 @@ def get_frameglass_tags(frameglass, df):
             tags.update(row[0])
     return tags
 
-def greedy_matching(frameglasses, paintings_tags):
-    from copy import deepcopy
+def reorder_frameglasses(frameglasses, get_tags, local_score):
+    used = [False] * len(frameglasses)
+    ordering = [frameglasses[0]]
+    used[0] = True
+    current_tags = get_tags(frameglasses[0])
 
-    def get_tags(frameglass):
-        tags = set()
-        for pid in frameglass:
-            tags.update(paintings_tags.get(pid, set()))
-        return tags
+    for _ in range(1, len(frameglasses)):
+        best_idx = -1
+        best_score = float('inf')
 
-    remaining = deepcopy(frameglasses)
-    current = remaining.pop(0)
-    ordering = [current]
-    current_tags = get_tags(current)
-
-    while remaining:
-        best_score = -1
-        best_index = -1
-
-        for i, candidate in enumerate(remaining):
-            candidate_tags = get_tags(candidate)
+        for i, fg in enumerate(frameglasses):
+            if used[i]:
+                continue
+            candidate_tags = get_tags(fg)
             score = local_score(current_tags, candidate_tags)
-            if score > best_score:
+            if score < best_score:
                 best_score = score
-                best_index = i
+                best_idx = i
 
-        next_frame = remaining.pop(best_index)
-        ordering.append(next_frame)
-        current_tags = get_tags(next_frame)
+        ordering.append(frameglasses[best_idx])
+        used[best_idx] = True
+        current_tags = get_tags(frameglasses[best_idx])
 
     return ordering
