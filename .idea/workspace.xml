@@ -99,7 +99,7 @@
       <workItem from="1747132670376" duration="94000" />
       <workItem from="1747221850735" duration="222000" />
       <workItem from="1747222576617" duration="13102000" />
-      <workItem from="1747394536439" duration="6737000" />
+      <workItem from="1747394536439" duration="8129000" />
     </task>
     <task id="LOCAL-00001" summary="read/parse&#10;same order (needs to be fixed)">
       <option name="closed" value="true" />
@@ -253,7 +253,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747401193934</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="functional greedy ordering implementation">
+      <option name="closed" value="true" />
+      <created>1747401342080</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1747401342080</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,6 +280,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PythonProject$script.coverage" NAME="script Coverage Results" MODIFIED="1747062508468" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
     <SUITE FILE_PATH="coverage/PythonProject$utils.coverage" NAME="utils Coverage Results" MODIFIED="1747399836259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
-    <SUITE FILE_PATH="coverage/PythonProject$test.coverage" NAME="test Coverage Results" MODIFIED="1747400884165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
+    <SUITE FILE_PATH="coverage/PythonProject$test.coverage" NAME="test Coverage Results" MODIFIED="1747402732913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
   </component>
 </project>

@@ -1,3 +1,4 @@
+import itertools
 from collections import defaultdict, Counter
 from itertools import combinations
 
@@ -205,33 +206,44 @@ def df_analysis(df, output_filepath="data/output/analysis_output.txt", plot=Fals
 
 def get_frameglass_tags(frameglass, df):
     tags = set()
+
+    # Ensure frameglass is always a list of IDs
+    if isinstance(frameglass, int):
+        frameglass = [frameglass]
+
     for painting_id in frameglass:
-        row = df.loc[df['id'] == painting_id, 'tags'].values
-        if row.size > 0:
-            tags.update(row[0])
+        painting_tags = df.loc[df['id'] == painting_id, 'tags'].values
+        if painting_tags.size > 0:
+            tags.update(painting_tags[0])
+
     return tags
 
-def reorder_frameglasses(frameglasses, get_tags, local_score):
-    used = [False] * len(frameglasses)
-    ordering = [frameglasses[0]]
-    used[0] = True
-    current_tags = get_tags(frameglasses[0])
+import itertools
 
-    for _ in range(1, len(frameglasses)):
-        best_idx = -1
-        best_score = float('inf')
+def greedy_match(df):
+    best_score = -1
+    best_frameglasses = None
 
-        for i, fg in enumerate(frameglasses):
-            if used[i]:
-                continue
-            candidate_tags = get_tags(fg)
-            score = local_score(current_tags, candidate_tags)
-            if score < best_score:
-                best_score = score
-                best_idx = i
+    # Get all permutations of painting records (not IDs)
+    records = df.to_dict("records")
+    for perm in itertools.permutations(records):
+        # Reconstruct a new DataFrame from the permutation
+        perm_df = pd.DataFrame(perm)
 
-        ordering.append(frameglasses[best_idx])
-        used[best_idx] = True
-        current_tags = get_tags(frameglasses[best_idx])
+        # Apply your logic to group into frameglasses
+        frameglasses = get_frameglasses(perm_df)
 
-    return ordering
+        # Compute tag sets
+        tags_list = [get_frameglass_tags(fg, df) for fg in frameglasses]
+
+        # Compute total local score
+        score = sum(
+            local_score(tags_list[i], tags_list[i + 1])
+            for i in range(len(tags_list) - 1)
+        )
+
+        if score > best_score:
+            best_score = score
+            best_frameglasses = frameglasses
+
+    return best_frameglasses  # As expected: list of [id] or [id1, id2]
