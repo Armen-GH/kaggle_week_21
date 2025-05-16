@@ -1,15 +1,20 @@
-import sys
-
 from main.utils import *
 import time
 
-
 start = time.time()
 
-df = parse_file("data/110_oily_portraits.txt")
-frameglasses = get_frameglasses(df)
-order = greedy_matching(frameglasses, df, "data/output/ordered_oily.txt")
-print(order)
+df = parse_file("data/0_example.txt")
+fg = get_frameglasses(df)
+paintings_tags = get_tags_with_paintings_dict(df)
+fg_gm =greedy_matching(fg, paintings_tags)
+write_fg(fg_gm, "data/output/example_gm.txt")
+print(global_score("data/output/example_gm.txt", df))
+
+# df = parse_file("data/10_computable_moments.txt")
+# paintings_tags = get_tags_with_paintings_dict(df)
+# fg = greedy_matching(df, paintings_tags)
+# write_fg(fg, "data/output/computable_gm.txt")
+# print(global_score("data/output/computable_gm.txt", df))
 
 end = time.time()
 print(f"Execution time: {end - start:.4f} seconds")

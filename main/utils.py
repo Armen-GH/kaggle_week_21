@@ -18,7 +18,7 @@ def parse_file(filepath):
             tags = parts[2:2 + tag_count]
 
             records.append({
-                "id": i+1,
+                "id": i,
                 "type": entry_type,
                 "tag_count": tag_count,
                 "tags": tags
@@ -211,29 +211,33 @@ def get_frameglass_tags(frameglass, df):
             tags.update(row[0])
     return tags
 
-def greedy_matching(frameglasses, df_paintings, output_filepath = "data/output/ordered_tags.txt"):
-    remaining = frameglasses.copy()
+def greedy_matching(frameglasses, paintings_tags):
+    from copy import deepcopy
+
+    def get_tags(frameglass):
+        tags = set()
+        for pid in frameglass:
+            tags.update(paintings_tags.get(pid, set()))
+        return tags
+
+    remaining = deepcopy(frameglasses)
     current = remaining.pop(0)
     ordering = [current]
-    current_tags = get_frameglass_tags(current, df_paintings)
+    current_tags = get_tags(current)
 
     while remaining:
-        best_score = float('inf')
+        best_score = -1
         best_index = -1
 
-        for idx, candidate in enumerate(remaining):
-            candidate_tags = get_frameglass_tags(candidate, df_paintings)
+        for i, candidate in enumerate(remaining):
+            candidate_tags = get_tags(candidate)
             score = local_score(current_tags, candidate_tags)
-            if score < best_score:
+            if score > best_score:
                 best_score = score
-                best_index = idx
+                best_index = i
 
         next_frame = remaining.pop(best_index)
         ordering.append(next_frame)
-        current_tags = get_frameglass_tags(next_frame, df_paintings)
+        current_tags = get_tags(next_frame)
 
-    with open(output_filepath, 'w', encoding='utf-8') as f:
-        f.write(f"{len(frameglasses)}\n")
-        for frame in frameglasses:
-            line = ' '.join(map(str, frame))
-            f.write(f"{line}\n")
+    return ordering
